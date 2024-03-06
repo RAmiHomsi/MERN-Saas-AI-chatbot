@@ -51,8 +51,12 @@ const Chat = () => {
       toast.loading("Loading Chats", { id: "loadchats" });
       getUserChats()
         .then((data) => {
-          setChatMessages([...data.chats]);
-          toast.success("Successfully loaded chats", { id: "loadchats" });
+          if (data.chats) {
+            setChatMessages([...data.chats]);
+            toast.success("Successfully loaded chats", { id: "loadchats" });
+          } else {
+            toast.error("You do not have no chats yet", { id: "loadchats" });
+          }
         })
         .catch((err) => {
           console.log(err);

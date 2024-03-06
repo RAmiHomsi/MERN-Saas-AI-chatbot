@@ -5,12 +5,8 @@ import {
   useEffect,
   useState,
 } from "react";
-import {
-  checkAuthStatus,
-  loginUser,
-  logoutUser,
-  signupUser,
-} from "../helpers/api-communicator";
+import { loginUser, logoutUser, signupUser } from "../helpers/api-communicator";
+import axios from "axios";
 
 type User = {
   name: string;
@@ -30,16 +26,13 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
 
   useEffect(() => {
-    // fetch if the user's cookies are valid then skip login
-    async function checkStatus() {
-      const data = await checkAuthStatus();
-      if (data) {
-        setUser({ email: data.email, name: data.name });
+    if (!user) {
+      axios.get("/user/auth-status").then(({ data }) => {
+        setUser(data);
         setIsLoggedIn(true);
-      }
+      });
     }
-    checkStatus();
-  }, []);
+  }, [user]);
   const login = async (email: string, password: string) => {
     const data = await loginUser(email, password);
     if (data) {
