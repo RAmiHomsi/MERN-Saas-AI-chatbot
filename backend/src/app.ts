@@ -9,7 +9,10 @@ const app = express();
 //middlewares
 app.use(
   cors({
-    origin: ["http://localhost:5173"],
+    origin: [
+      "http://localhost:5173",
+      "https://rami-saas-ai-chatbot.vercel.app/api",
+    ],
     methods: ["POST", "GET", "DELETE", "PUT"],
     credentials: true,
   })
