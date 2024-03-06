@@ -7,7 +7,16 @@ config();
 const app = express();
 
 //middlewares
-app.use(cors({ origin: "http://localhost:5173", credentials: true }));
+app.use(
+  cors({
+    origin: [
+      "https://rami-saas-ai-chatbot.vercel.app/api",
+      "http://localhost:5173/api",
+    ],
+    methods: ["POST", "GET", "DELETE", "PUT"],
+    credentials: true,
+  })
+);
 app.use(express.json());
 app.use(cookieParser(process.env.COOKIE_SECRET));
 
