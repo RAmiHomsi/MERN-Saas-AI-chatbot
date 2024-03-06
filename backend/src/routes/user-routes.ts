@@ -5,9 +5,13 @@ import {
   userLogout,
   userSignup,
   verifyUser,
-} from "../controllers/user-controllers";
-import { loginValidator, signupValidator, validate } from "../utils/validators";
-import { verifyToken } from "../utils/token-manager";
+} from "../controllers/user-controllers.js";
+import {
+  loginValidator,
+  signupValidator,
+  validate,
+} from "../utils/validators.js";
+import { verifyToken } from "../utils/token-manager.js";
 
 const userRoutes = Router();
 
